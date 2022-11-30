@@ -23,6 +23,14 @@ namespace InTheBag
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddMemoryCache();
+            services.AddSession();
+            services.AddSession(options =>
+            {
+                // change idle timeout from 20mins to 5
+                options.IdleTimeout = TimeSpan.FromSeconds(60 * 5);
+                options.Cookie.IsEssential = true; // default false
+            });
             services.AddControllersWithViews();
         }
 
@@ -45,6 +53,8 @@ namespace InTheBag
             app.UseRouting();
 
             app.UseAuthorization();
+
+            app.UseSession();
 
             app.UseEndpoints(endpoints =>
             {
