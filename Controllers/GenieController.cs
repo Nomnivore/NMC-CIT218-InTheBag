@@ -42,5 +42,19 @@ namespace InTheBag.Controllers
             else
                 return View("Novice");
         }
+
+        public IActionResult Perks()
+        {
+            ViewBag.Posted = false;
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult Perks(string[] perk)
+        {
+            ViewBag.Posted = true;
+            ViewBag.Perks = perk;
+            return View();
+        }
     }
 }
