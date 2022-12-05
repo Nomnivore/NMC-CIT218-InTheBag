@@ -30,5 +30,17 @@ namespace InTheBag.Controllers
             else
                 return View("Novice");
         }
+
+        public IActionResult Create2()
+        {
+            var name = RouteData.Values["GenieName"];
+            var Years = Int32.Parse((string)RouteData.Values["Age"]);
+            var numGranted = Int32.Parse((string)RouteData.Values["WishesGranted"]);
+
+            if (numGranted > 5000 || Years > 1000)
+                return View("ExperiencedGenie");
+            else
+                return View("Novice");
+        }
     }
 }
